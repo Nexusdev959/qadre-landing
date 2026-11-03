@@ -17,3 +17,4 @@ if (fs.existsSync(srcDir)) {
 } else {
   console.warn('! Source dir does not exist:', srcDir);
 }
+
