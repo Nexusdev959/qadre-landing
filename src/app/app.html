@@ -573,9 +573,9 @@
           </p>
 
           <div class="contact-items">
-            <a class="info-row" href="https://wa.me/573126430636" target="_blank" rel="noopener">
+            <a class="info-row" href="https://wa.me/573001234567" target="_blank" rel="noopener">
               <span class="icon-tile"><svg class="ico"><use href="#i-chat" /></svg></span>
-              <div><strong>WhatsApp asesoría</strong><p>+57 (312) 643-0636</p></div>
+              <div><strong>WhatsApp asesoría</strong><p>+57 (300) 123-4567</p></div>
             </a>
             <a class="info-row" href="mailto:soporte&#64;qadre.net">
               <span class="icon-tile cyan"><svg class="ico"><use href="#i-mail" /></svg></span>
@@ -588,7 +588,7 @@
           </div>
 
           <a
-            href="https://wa.me/573126430636?text=Hola%20equipo%20Qadre,%20quiero%20solicitar%20una%20demostraci%C3%B3n"
+            href="https://wa.me/573001234567?text=Hola%20equipo%20Qadre,%20quiero%20solicitar%20una%20demostraci%C3%B3n"
             target="_blank"
             rel="noopener"
             class="btn btn-whatsapp">
@@ -604,11 +604,11 @@
           <form (ngSubmit)="sendContact()" class="contact-form">
             <div class="form-group">
               <label for="name">Tu nombre *</label>
-              <input type="text" id="name" name="name" [(ngModel)]="contactData.name" placeholder="Ej. Carlos Miranda" required />
+              <input type="text" id="name" name="name" [(ngModel)]="contactData.name" placeholder="Ej. Camila Morales" required />
             </div>
             <div class="form-group">
               <label for="business">Nombre de tu negocio</label>
-              <input type="text" id="business" name="business" [(ngModel)]="contactData.business" placeholder="Ej. The Nexus Store" />
+              <input type="text" id="business" name="business" [(ngModel)]="contactData.business" placeholder="Ej. Minimarket La Esquina" />
             </div>
             <div class="form-group">
               <label for="type">Tipo de negocio</label>
@@ -619,11 +619,11 @@
             </div>
             <div class="form-group">
               <label for="phone">Número de WhatsApp *</label>
-              <input type="tel" id="phone" name="phone" [(ngModel)]="contactData.phone" placeholder="Ej. 312 643 0636" required />
+              <input type="tel" id="phone" name="phone" [(ngModel)]="contactData.phone" placeholder="Ej. 300 123 4567" required />
             </div>
             <div class="form-group">
               <label for="email">Correo electrónico</label>
-              <input type="email" id="email" name="email" [(ngModel)]="contactData.email" placeholder="Ej. carlos@minegocio.com" />
+              <input type="email" id="email" name="email" [(ngModel)]="contactData.email" placeholder="Ej. contacto@minegocio.com" />
             </div>
             <!-- campo trampa: los bots lo llenan, las personas no lo ven -->
             <div class="hp-field" aria-hidden="true">
@@ -633,6 +633,16 @@
             <div class="form-group">
               <label for="message">¿Qué te gustaría mejorar en tu negocio?</label>
               <textarea id="message" name="message" rows="3" [(ngModel)]="contactData.message" placeholder="Ej. Quiero controlar mis fiados y tener un catálogo web..."></textarea>
+            </div>
+                        <div class="form-checkbox-group">
+              <label class="form-checkbox" for="terms">
+                <input type="checkbox" id="terms" name="terms" [(ngModel)]="contactData.terms" required />
+                <span class="form-checkbox-text">
+                  Autorizo el tratamiento de mis datos personales de acuerdo con la
+                  <a href="javascript:void(0)" (click)="openPrivacyModal($event)">Política de Tratamiento de Datos (Ley 1581 de 2012)</a>
+                  para ser contactado con fines informativos, de asesoría y demostración comercial de QADRE. *
+                </span>
+              </label>
             </div>
             <button type="submit" class="btn btn-primary w-full" [disabled]="contactStatus() === 'sending'">
               {{ contactStatus() === 'sending' ? 'Enviando…' : 'Enviar solicitud' }}
@@ -681,10 +691,11 @@
         <a href="#promociones">Promociones</a>
       </div>
       <div class="footer-col">
-        <h5>Soporte</h5>
-        <a href="#contacto">Contacto WhatsApp</a>
-        <a href="mailto:soporte&#64;qadre.net">soporte&#64;qadre.net</a>
+        <h5>Soporte y Legal</h5>
+        <a href="#contacto">Contacto asesoría</a>
+        <a href="mailto:soporte@qadre.net">soporte@qadre.net</a>
         <a href="#faq">Preguntas frecuentes</a>
+        <a href="javascript:void(0)" (click)="openPrivacyModal($event)">Tratamiento de Datos Personales</a>
       </div>
     </div>
   </div>
@@ -692,6 +703,7 @@
   <div class="footer-bottom">
     <div class="container bottom-wrap">
       <span>© {{ year }} QADRE. Todos los derechos reservados.</span>
+      <a href="javascript:void(0)" (click)="openPrivacyModal($event)" class="legal-link">Tratamiento de Datos (Ley 1581 de 2012)</a>
       <a class="credit" href="#" aria-label="Diseñado por The Nexus Dev">
         <span>Diseñado por</span>
         <img class="on-dark" src="brand/nexus-dark.png" alt="The Nexus Dev" width="480" height="236" />
@@ -700,3 +712,75 @@
     </div>
   </div>
 </footer>
+
+
+<!-- MODAL POLÍTICA DE TRATAMIENTO DE DATOS PERSONALES (LEY 1581 DE 2012) -->
+@if (privacyModalOpen()) {
+  <div class="modal-backdrop" (click)="closePrivacyModal()" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-head">
+        <h3 id="privacy-title">Política de Tratamiento de Datos Personales (Habeas Data)</h3>
+        <button type="button" class="modal-close-btn" (click)="closePrivacyModal()" aria-label="Cerrar modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-intro">
+          En cumplimiento de la <strong>Ley Estatutaria 1581 de 2012</strong>, el <strong>Decreto Reglamentario 1377 de 2013</strong> y demás normas concordantes de la República de Colombia, la plataforma <strong>QADRE</strong> informa a los usuarios, clientes y titulares de la información los lineamientos bajo los cuales realiza el tratamiento y protección de sus datos personales.
+        </p>
+
+        <h4>1. Responsable del Tratamiento</h4>
+        <p>
+          <strong>Plataforma QADRE</strong><br />
+          Sitio web: <a href="https://qadre.net" target="_blank" rel="noopener">https://qadre.net</a><br />
+          Canal oficial para el ejercicio de derechos de Habeas Data: <strong>soporte&#64;qadre.net</strong>
+        </p>
+
+        <h4>2. Datos que Recolectamos</h4>
+        <p>A través de nuestros formularios web recolectamos datos de identificación y contacto comercial de naturaleza pública y semiprivada:</p>
+        <ul>
+          <li>Nombre del solicitante o representante del negocio.</li>
+          <li>Nombre o razón comercial del establecimiento.</li>
+          <li>Tipo de negocio o actividad económica.</li>
+          <li>Número de WhatsApp o teléfono de contacto.</li>
+          <li>Dirección de correo electrónico.</li>
+        </ul>
+
+        <h4>3. Finalidades del Tratamiento</h4>
+        <p>Los datos personales recolectados serán utilizados exclusivamente para los siguientes fines legítimos:</p>
+        <ul>
+          <li>Gestionar, tramitar y responder oportunamente a su solicitud de información, demostración guiada o cotización de la plataforma QADRE.</li>
+          <li>Brindarle asesoría comercial y acompañamiento técnico en la puesta en marcha de su negocio (catálogo digital, POS e inventario).</li>
+          <li>Habilitar el período de prueba gratuito de 15 días con acceso a las funciones completas del sistema.</li>
+          <li>Enviar información estrictamente relacionada con el servicio, avisos de mantenimiento, actualizaciones de la plataforma y soporte.</li>
+        </ul>
+
+        <h4>4. Confidencialidad y Seguridad de la Información</h4>
+        <p>
+          QADRE implementa medidas técnicas, humanas y administrativas para garantizar la confidencialidad e integridad de sus datos personales. <strong>Bajo ninguna circunstancia vendemos, alquilamos ni comercializamos sus datos con terceros</strong>. Toda la comunicación entre su navegador y nuestros servidores viaja cifrada mediante certificados SSL/TLS con altos estándares de seguridad.
+        </p>
+
+        <h4>5. Derechos de los Titulares (Artículo 8 de la Ley 1581 de 2012)</h4>
+        <p>Como titular de los datos personales, le asisten los siguientes derechos:</p>
+        <ul>
+          <li><strong>Conocer, actualizar y rectificar</strong> sus datos personales frente a QADRE en cualquier momento.</li>
+          <li><strong>Solicitar prueba</strong> de la autorización otorgada para el tratamiento.</li>
+          <li><strong>Ser informado</strong> sobre el uso específico que se ha dado a sus datos.</li>
+          <li><strong>Revocar la autorización y/o solicitar la supresión</strong> de sus datos cuando considere que en el tratamiento no se respetan los principios, derechos y garantías legales.</li>
+          <li><strong>Presentar quejas</strong> ante la Superintendencia de Industria y Comercio (SIC) por infracciones a la legislación de protección de datos.</li>
+        </ul>
+
+        <h4>6. Procedimiento para el Ejercicio de sus Derechos de Habeas Data</h4>
+        <p>
+          Para ejercer su derecho a conocer, actualizar, rectificar o solicitar la supresión definitiva de sus datos de nuestras bases de datos, puede enviar una solicitud por escrito a:
+        </p>
+        <p>
+          <strong>Correo electrónico:</strong> <code>soporte&#64;qadre.net</code><br />
+          <strong>Asunto:</strong> Solicitud Habeas Data - Tratamiento de Datos Personales<br />
+          Indicando su nombre completo, número de teléfono y la descripción clara de su solicitud. Su requerimiento será resuelto en un plazo máximo de quince (15) días hábiles conforme lo establece el marco legal colombiano.
+        </p>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn btn-primary" (click)="closePrivacyModal()">He leído y acepto</button>
+      </div>
+    </div>
+  </div>
+}

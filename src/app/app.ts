@@ -140,10 +140,12 @@ export class App {
     email: '',
     message: '',
     website: '', // campo trampa para bots, oculto
+    terms: false, // consentimiento previo y expreso conforme a Ley 1581 de 2012
   };
 
   readonly contactStatus = signal<'idle' | 'sending' | 'sent' | 'error'>('idle');
   readonly contactError = signal<string>('');
+  readonly privacyModalOpen = signal<boolean>(false);
 
   // Planes y límites: deben coincidir con qadre_api/src/common/plans/plans.ts
   readonly plans: PlanItem[] = [
@@ -304,6 +306,15 @@ export class App {
     this.mobileMenuOpen.update((v) => !v);
   }
 
+  openPrivacyModal(e?: Event) {
+    if (e) e.preventDefault();
+    this.privacyModalOpen.set(true);
+  }
+
+  closePrivacyModal() {
+    this.privacyModalOpen.set(false);
+  }
+
   closeMobileMenu() {
     this.mobileMenuOpen.set(false);
   }
@@ -324,6 +335,11 @@ export class App {
   async sendContact() {
     const d = this.contactData;
     if (!d.name.trim() || !d.phone.trim() || this.contactStatus() === 'sending') return;
+    if (!d.terms) {
+      this.contactError.set('Debes autorizar el tratamiento de tus datos personales conforme a la ley para poder enviarte la información.');
+      this.contactStatus.set('error');
+      return;
+    }
     this.contactStatus.set('sending');
     try {
       const res = await fetch(`${API_URL}/public/contact`, {
