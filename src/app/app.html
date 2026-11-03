@@ -53,7 +53,7 @@
 </div>
 
 <!-- Header / Navbar Sticky -->
-<header class="navbar" [class.scrolled]="scrolled()">
+<header class="navbar" [class.scrolled]="scrolled() || mobileMenuOpen()">
   <div class="nav-container">
     <a href="#" class="brand-logo" aria-label="Qadre, inicio">
       <img class="brand-icon on-dark" src="brand/icon-dark.png" alt="" width="40" height="40" />
@@ -62,9 +62,27 @@
       <img class="brand-wordmark on-light" src="brand/wordmark-light.png" alt="Qadre, tu negocio al día" width="300" height="121" />
     </a>
 
-    <nav class="nav-links" aria-label="Secciones">
-      @for (item of navItems; track item.id) {
-        <a [href]="'#' + item.id" [class.active]="activeSection() === item.id">{{ item.label }}</a>
+    <nav class="nav-links" aria-label="Secciones" #navLinks (mouseleave)="snapIndicator()">
+      <span class="nav-indicator" aria-hidden="true" [class.show]="!!indicator()" [style.left.px]="indicator()?.left" [style.width.px]="indicator()?.width"></span>
+      @for (group of navGroups; track group.label) {
+        @if (group.items.length === 1) {
+          <a [href]="'#' + group.items[0].id" (mouseenter)="moveIndicator($event)" [class.active]="activeSection() === group.items[0].id">{{ group.label }}</a>
+        } @else {
+          <div class="nav-group" (mouseenter)="moveIndicator($event)">
+            <button type="button" class="nav-trigger" aria-haspopup="true" [class.active]="isGroupActive(group.items)">
+              {{ group.label }}
+              <svg class="nav-caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+            <div class="nav-menu">
+              @for (item of group.items; track item.id) {
+                <a [href]="'#' + item.id" [class.active]="activeSection() === item.id" (click)="$any($event.currentTarget).blur()">
+                  <strong>{{ item.label }}</strong>
+                  <span>{{ item.desc }}</span>
+                </a>
+              }
+            </div>
+          </div>
+        }
       }
     </nav>
 
@@ -100,8 +118,13 @@
   @if (mobileMenuOpen()) {
     <div class="mobile-drawer" (click)="closeMobileMenu()">
       <div class="mobile-links" (click)="$event.stopPropagation()">
-        @for (item of navItems; track item.id; let i = $index) {
-          <a [href]="'#' + item.id" [style.--i]="i" (click)="closeMobileMenu()">{{ item.label }}</a>
+        @for (group of navGroups; track group.label; let i = $index) {
+          @if (group.items.length > 1) {
+            <span class="mobile-group" [style.--i]="i">{{ group.label }}</span>
+          }
+          @for (item of group.items; track item.id) {
+            <a [href]="'#' + item.id" [style.--i]="i" (click)="closeMobileMenu()">{{ item.label }}</a>
+          }
         }
         <div class="mobile-cta-group">
           <a href="https://app.qadre.net" target="_blank" rel="noopener" class="btn btn-secondary w-full">Iniciar sesión</a>
@@ -379,6 +402,56 @@
           <h4>¡Listo para vender!</h4>
           <p>Abre tu caja, atiende en mostrador o comparte tu enlace por WhatsApp.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUÍAS PASO A PASO -->
+  <section id="guias" class="section-container">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Guías de uso</span>
+        <h2 class="section-title">Aprende a usar Qadre paso a paso</h2>
+        <p class="section-subtitle">Elige una función y sigue los pasos tal como los verás en la app.</p>
+      </div>
+
+      <div class="guide-tabs reveal" role="tablist" aria-label="Funciones">
+        @for (g of guides; track g.id) {
+          <button
+            type="button"
+            role="tab"
+            class="guide-tab"
+            [id]="'guide-tab-' + g.id"
+            [class.active]="activeGuide() === g.id"
+            [attr.aria-selected]="activeGuide() === g.id"
+            aria-controls="guide-panel"
+            (click)="activeGuide.set(g.id)">
+            {{ g.title }}
+          </button>
+        }
+      </div>
+
+      @let guide = currentGuide();
+      <div id="guide-panel" class="guide-panel glass-panel reveal" role="tabpanel" [attr.aria-labelledby]="'guide-tab-' + guide.id">
+        <div class="guide-head">
+          <h3>{{ guide.title }}</h3>
+          <span class="guide-plan">{{ guide.plan }}</span>
+        </div>
+        @if (guide.video) {
+          <div class="guide-video">
+            <iframe
+              [src]="videoUrl(guide.video)"
+              [title]="'Video: ' + guide.title"
+              loading="lazy"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+        }
+        <ol class="guide-steps">
+          @for (step of guide.steps; track $index) {
+            <li><span class="guide-num" aria-hidden="true">{{ $index + 1 }}</span><span>{{ step }}</span></li>
+          }
+        </ol>
       </div>
     </div>
   </section>

@@ -1,6 +1,7 @@
-import { Component, DestroyRef, HostListener, afterNextRender, inject, signal } from '@angular/core';
+import { Component, DestroyRef, ElementRef, HostListener, afterNextRender, afterRenderEffect, inject, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 // API de Qadre: en local apunta al servidor de desarrollo
 const API_URL = ['localhost', '127.0.0.1'].includes(globalThis.location?.hostname ?? '')
@@ -24,6 +25,17 @@ export interface PlanItem {
 export interface CompareGroup {
   title: string;
   rows: { label: string; values: (boolean | string)[] }[];
+}
+
+// Guía paso a paso de una función; los nombres de menús y botones son los de la app
+export interface Guide {
+  id: string;
+  title: string;
+  /** Plan desde el que está disponible. */
+  plan: string;
+  steps: string[];
+  /** Id de un video de YouTube con el paso a paso; si existe, se muestra encima de los pasos. */
+  video?: string;
 }
 
 export interface FaqItem {
@@ -58,28 +70,53 @@ export class App {
 
   readonly year = new Date().getFullYear();
 
-  readonly navItems = [
-    { id: 'proposito', label: '¿Para qué sirve?' },
-    { id: 'funciones', label: 'Funciones' },
-    { id: 'tiempos', label: 'Puesta en marcha' },
-    { id: 'planes', label: 'Planes' },
-    { id: 'faq', label: 'Preguntas' },
-    { id: 'contacto', label: 'Contacto' },
+  // Desktop shows one entry per group; groups with several items open a menu with a short preview of each section
+  readonly navGroups = [
+    {
+      label: 'Producto',
+      items: [
+        { id: 'proposito', label: '¿Para qué sirve?', desc: 'Qué resuelve Qadre en tu negocio y por qué lo necesitas.' },
+        { id: 'funciones', label: 'Funciones', desc: 'Ventas, inventario, fiados, catálogo digital y más.' },
+        { id: 'tiempos', label: 'Puesta en marcha', desc: 'Te registras, aprobamos tu tienda y empiezas a vender.' },
+      ],
+    },
+    { label: 'Planes', items: [{ id: 'planes', label: 'Planes', desc: 'Precios por etapa de tu negocio, sin permanencia.' }] },
+    {
+      label: 'Ayuda',
+      items: [
+        { id: 'guias', label: 'Guías', desc: 'Aprende cada función paso a paso, tal como la verás en la app.' },
+        { id: 'faq', label: 'Preguntas', desc: 'Todo lo que necesitas saber antes de empezar.' },
+        { id: 'contacto', label: 'Contacto', desc: 'Escríbenos o pide una demostración.' },
+      ],
+    },
   ];
+  readonly navItems = this.navGroups.flatMap((g) => g.items);
+
+  // Sliding pill in the desktop nav: follows the cursor, rests on the current section
+  readonly indicator = signal<{ left: number; width: number } | null>(null);
+  private readonly navLinks = viewChild<ElementRef<HTMLElement>>('navLinks');
 
   readonly segments = [
     'Tiendas de barrio', 'Barberías', 'Salones de belleza', 'Tecnología', 'Ropa y calzado',
     'Ferreterías', 'Droguerías', 'Spas', 'Panaderías', 'Consultorios', 'Papelerías', 'Talleres',
   ];
 
+  private readonly sanitizer = inject(DomSanitizer);
+
   constructor() {
     const destroyRef = inject(DestroyRef);
+    // Runs after the .active classes are rendered, so the pill lands on the new section while scrolling
+    afterRenderEffect(() => {
+      this.activeSection();
+      this.snapIndicator();
+    });
     afterNextRender(() => {
       this.theme.set(document.documentElement.dataset['theme'] === 'light' ? 'light' : 'dark');
       this.onScroll();
 
-      // Reveal-on-scroll: add .in once an element enters the viewport
-      const reveal = new IntersectionObserver(
+      if (typeof IntersectionObserver !== 'undefined') {
+        // Reveal-on-scroll: add .in once an element enters the viewport
+        const reveal = new IntersectionObserver(
         (entries) => {
           for (const e of entries) {
             if (e.isIntersecting) {
@@ -105,10 +142,25 @@ export class App {
       });
 
       destroyRef.onDestroy(() => {
-        reveal.disconnect();
-        spy.disconnect();
-      });
+          reveal.disconnect();
+          spy.disconnect();
+        });
+      }
     });
+  }
+
+  moveIndicator(e: Event) {
+    const el = e.currentTarget as HTMLElement;
+    this.indicator.set({ left: el.offsetLeft, width: el.offsetWidth });
+  }
+
+  snapIndicator() {
+    const el = this.navLinks()?.nativeElement.querySelector<HTMLElement>(':scope > a.active, :scope > .nav-group:has(.nav-trigger.active)');
+    this.indicator.set(el?.offsetWidth ? { left: el.offsetLeft, width: el.offsetWidth } : null);
+  }
+
+  isGroupActive(items: { id: string }[]) {
+    return items.some((i) => i.id === this.activeSection());
   }
 
   @HostListener('window:scroll')
@@ -250,6 +302,102 @@ export class App {
       ],
     },
   ];
+
+  readonly guides: Guide[] = [
+    {
+      id: 'vender',
+      title: 'Abrir caja y vender',
+      plan: 'Todos los planes',
+      steps: [
+        'Entra a Ventas. Si la caja está cerrada, toca "Abrir caja" y escribe el efectivo con el que empiezas el turno.',
+        'En la pestaña Vender, busca el producto por nombre o código y tócalo para agregarlo a la venta.',
+        'Toca "Cobrar" y elige cómo pagó el cliente: efectivo, tarjeta o transferencia.',
+        'Confirma con "Cobrar venta". El stock de cada producto se descuenta solo.',
+        'Envía el ticket con "Enviar por WhatsApp" o descárgalo en imagen o PDF.',
+        'Al terminar el turno toca "Cerrar caja": Qadre te muestra el efectivo esperado y la diferencia.',
+      ],
+    },
+    {
+      id: 'productos',
+      title: 'Agregar productos',
+      plan: 'Todos los planes',
+      steps: [
+        'Entra a Inventario y toca "Nuevo producto".',
+        'Escribe el nombre, el precio de venta y el costo unitario: con el costo, Qadre calcula tu ganancia.',
+        'Indica las existencias y el stock mínimo. Cuando un producto baje de ese número, te avisa.',
+        'Agrega una foto para reconocerlo rápido al vender y para mostrarlo en tu catálogo.',
+        'Guarda. El producto ya aparece en Ventas, listo para vender.',
+      ],
+    },
+    {
+      id: 'fiados',
+      title: 'Fiados y abonos',
+      plan: 'Desde el plan Pro',
+      steps: [
+        'En Ventas agrega los productos, toca "Cobrar" y elige "Crédito".',
+        'Escoge el cliente o escribe su nombre y WhatsApp. La venta queda en Ventas › Por cobrar.',
+        'Cuando el cliente pague, abre su cuenta en Por cobrar y toca "Registrar abono".',
+        'Envíale el comprobante con el saldo nuevo usando "Compartir comprobante".',
+        'Para cobrar a tiempo, usa "Recordar por WhatsApp" o envía el estado de cuenta en PDF o imagen.',
+      ],
+    },
+    {
+      id: 'catalogo',
+      title: 'Catálogo digital',
+      plan: 'Desde el plan Pro',
+      steps: [
+        'Entra a Ajustes › Pagos y agrega tu WhatsApp y tus medios de pago.',
+        'En Ajustes › Catálogo elige el estilo de tu tienda y toca "Publicar catálogo".',
+        'Ve a Marketing › Catálogo y comparte tu enlace con "Enviar por WhatsApp", o toca "Descargar QR" para imprimirlo.',
+        'Tus clientes eligen productos, arman el carrito y el pedido te llega por WhatsApp con el total.',
+      ],
+    },
+    {
+      id: 'posters',
+      title: 'Pósters de marketing',
+      plan: 'Todos los planes (según el cupo del plan)',
+      steps: [
+        'Entra a Marketing › Crear póster.',
+        'Elige el producto y el formato: post cuadrado, historia o volante.',
+        'Ajusta el estilo y los textos; la foto y el precio salen de tu inventario.',
+        'Toca "Compartir póster" para publicarlo en tus estados o descárgalo.',
+        'Con "Por lote" creas pósters de varios productos a la vez.',
+      ],
+    },
+    {
+      id: 'citas',
+      title: 'Agenda de citas',
+      plan: 'Negocios de servicios · reservas en línea desde Pro',
+      steps: [
+        'En Servicios toca "Nuevo servicio" y escribe el nombre, la duración y el precio.',
+        'Activa "Mostrar en el catálogo público" si quieres que tus clientes reserven en línea.',
+        'En Agenda toca "Nueva cita": elige el servicio, el cliente, la hora y el profesional. Qadre te avisa si la hora se cruza con otra cita.',
+        'El día de la cita, envíale al cliente el recordatorio por WhatsApp desde la agenda.',
+      ],
+    },
+    {
+      id: 'equipo',
+      title: 'Equipo y asistencia',
+      plan: 'Usuarios desde Pro · asistencia en Negocio Total',
+      steps: [
+        'En Equipo › Perfiles toca "Nuevo perfil" y elige el rol: Gerente, Supervisor o Colaborador.',
+        'En Equipo › Turnos programa la semana de cada persona.',
+        'Cada colaborador marca "Iniciar turno", sus pausas y "Terminar turno" en Equipo › Asistencia.',
+        'El reporte del mes muestra horas trabajadas, horas extra, recargos y ausencias.',
+      ],
+    },
+  ];
+
+  readonly activeGuide = signal<string>('vender');
+
+  currentGuide(): Guide {
+    return this.guides.find((g) => g.id === this.activeGuide()) ?? this.guides[0];
+  }
+
+  // Solo se embeben ids de YouTube escritos aquí, nunca datos de usuarios
+  videoUrl(id: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}`);
+  }
 
   isBool(v: boolean | string): v is boolean {
     return typeof v === 'boolean';
