@@ -1,0 +1,126 @@
+/* ==========================================================================
+   QADRE LANDING · DESIGN TOKENS (light / dark) & GLOBAL STYLES
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+  --bg: #07090e;
+  --bg-surface: #0b1018;
+  --bg-elev: #111827;
+  --card: rgba(17, 24, 39, 0.62);
+  --card-solid: #0f1622;
+  --card-hover: rgba(30, 41, 59, 0.7);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --nav-bg: rgba(7, 9, 14, 0.72);
+  --input-bg: rgba(7, 9, 14, 0.7);
+  --shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.7);
+  --soft: rgba(255, 255, 255, 0.04);
+
+  --text: #f1f5f9;
+  --text-2: #cbd5e1;
+  --muted: #94a3b8;
+
+  --brand: #10b981;
+  --brand-2: #34d399;
+  --brand-ink: #052e1f;
+  --cyan: #06b6d4;
+  --amber: #f59e0b;
+  --violet: #8b5cf6;
+  --danger: #f87171;
+  --brand-tint: rgba(16, 185, 129, 0.12);
+
+  --glow-a: rgba(16, 185, 129, 0.18);
+  --glow-b: rgba(6, 182, 212, 0.14);
+  --grid-line: rgba(255, 255, 255, 0.035);
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f6f8fb;
+  --bg-surface: #eef2f7;
+  --bg-elev: #ffffff;
+  --card: rgba(255, 255, 255, 0.78);
+  --card-solid: #ffffff;
+  --card-hover: rgba(255, 255, 255, 0.95);
+  --border: rgba(15, 23, 42, 0.09);
+  --border-strong: rgba(15, 23, 42, 0.18);
+  --nav-bg: rgba(246, 248, 251, 0.78);
+  --input-bg: #ffffff;
+  --shadow: 0 24px 48px -24px rgba(15, 23, 42, 0.22);
+  --soft: rgba(15, 23, 42, 0.035);
+
+  --text: #0b1220;
+  --text-2: #334155;
+  --muted: #64748b;
+
+  --brand: #059669;
+  --brand-2: #047857;
+  --danger: #dc2626;
+  --brand-tint: rgba(5, 150, 105, 0.1);
+
+  --glow-a: rgba(16, 185, 129, 0.16);
+  --glow-b: rgba(6, 182, 212, 0.12);
+  --grid-line: rgba(15, 23, 42, 0.05);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+
+::selection {
+  background: var(--brand);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Smooth cross-fade when switching theme (View Transitions API) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

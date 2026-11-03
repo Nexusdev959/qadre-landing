@@ -1,0 +1,702 @@
+<!-- Icon sprite (replaces emojis; stroke icons inherit currentColor) -->
+<svg class="sprite" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5V8z"/><path d="m3 8 9 5 9-5M12 13v8"/></symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M16 15h2"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v9H5v-9"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></symbol>
+    <symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.2A8.38 8.38 0 0 1 3 11.5 8.5 8.5 0 0 1 12 3a8.38 8.38 0 0 1 9 8.5z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></symbol>
+  </defs>
+</svg>
+
+<!-- Intro curtain: plays once on load, then gets out of the way -->
+<div class="intro" aria-hidden="true">
+  <div class="intro-panel intro-top"></div>
+  <div class="intro-panel intro-bottom"></div>
+  <div class="intro-logo">
+    <img class="intro-icon on-dark" src="brand/icon-dark.png" alt="" width="124" height="124" />
+    <img class="intro-icon on-light" src="brand/icon-light.png" alt="" width="124" height="124" />
+    <div class="intro-word">
+      <img class="on-dark" src="brand/wordmark-dark.png" alt="" width="300" height="121" />
+      <img class="on-light" src="brand/wordmark-light.png" alt="" width="300" height="121" />
+    </div>
+  </div>
+  <div class="intro-bar"></div>
+</div>
+
+<!-- Scroll progress bar (pure CSS scroll-driven animation) -->
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<!-- Animated background -->
+<div class="bg-fx" aria-hidden="true">
+  <div class="bg-grid"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- Header / Navbar Sticky -->
+<header class="navbar" [class.scrolled]="scrolled()">
+  <div class="nav-container">
+    <a href="#" class="brand-logo" aria-label="Qadre, inicio">
+      <img class="brand-icon on-dark" src="brand/icon-dark.png" alt="" width="40" height="40" />
+      <img class="brand-icon on-light" src="brand/icon-light.png" alt="" width="40" height="40" />
+      <img class="brand-wordmark on-dark" src="brand/wordmark-dark.png" alt="Qadre, tu negocio al día" width="300" height="121" />
+      <img class="brand-wordmark on-light" src="brand/wordmark-light.png" alt="Qadre, tu negocio al día" width="300" height="121" />
+    </a>
+
+    <nav class="nav-links" aria-label="Secciones">
+      @for (item of navItems; track item.id) {
+        <a [href]="'#' + item.id" [class.active]="activeSection() === item.id">{{ item.label }}</a>
+      }
+    </nav>
+
+    <div class="nav-actions">
+      <button
+        type="button"
+        class="theme-toggle"
+        (click)="toggleTheme()"
+        [attr.aria-label]="theme() === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+        [attr.title]="theme() === 'dark' ? 'Modo claro' : 'Modo oscuro'">
+        <svg class="ico ico-sun"><use href="#i-sun" /></svg>
+        <svg class="ico ico-moon"><use href="#i-moon" /></svg>
+      </button>
+      <a href="https://app.qadre.net" target="_blank" rel="noopener" class="btn btn-ghost hide-sm">Iniciar sesión</a>
+      <a href="https://app.qadre.net/#/register" target="_blank" rel="noopener" class="btn btn-primary hide-sm">
+        <span>Probar gratis</span>
+        <svg class="ico"><use href="#i-arrow" /></svg>
+      </a>
+      <button
+        type="button"
+        class="menu-toggle"
+        [class.open]="mobileMenuOpen()"
+        (click)="toggleMobileMenu()"
+        aria-label="Menú"
+        [attr.aria-expanded]="mobileMenuOpen()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </div>
+
+  @if (mobileMenuOpen()) {
+    <div class="mobile-drawer" (click)="closeMobileMenu()">
+      <div class="mobile-links" (click)="$event.stopPropagation()">
+        @for (item of navItems; track item.id; let i = $index) {
+          <a [href]="'#' + item.id" [style.--i]="i" (click)="closeMobileMenu()">{{ item.label }}</a>
+        }
+        <div class="mobile-cta-group">
+          <a href="https://app.qadre.net" target="_blank" rel="noopener" class="btn btn-secondary w-full">Iniciar sesión</a>
+          <a href="https://app.qadre.net/#/register" target="_blank" rel="noopener" class="btn btn-primary w-full">Empezar 15 días gratis</a>
+        </div>
+      </div>
+    </div>
+  }
+</header>
+
+<main class="page-main">
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge-pill enter" style="--d: 0">
+          <span class="pulse-dot"></span>
+          <span>Plataforma Cloud POS & Catálogo WhatsApp</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="enter" style="--d: 1">Ventas, inventario y catálogo digital</span>
+          <span class="gradient-text enter" style="--d: 2">en un solo lugar.</span>
+        </h1>
+
+        <p class="hero-lead enter" style="--d: 3">
+          Controla tu negocio desde cualquier dispositivo sin instalar programas pesados. Registra cada venta al instante, cobra tus fiados con comprobantes por WhatsApp y comparte tu tienda online en segundos.
+        </p>
+
+        <div class="hero-actions enter" style="--d: 4">
+          <a href="https://app.qadre.net/#/register" target="_blank" rel="noopener" class="btn btn-primary btn-lg shine">
+            <span>Comenzar prueba gratis de 15 días</span>
+            <svg class="ico"><use href="#i-arrow" /></svg>
+          </a>
+          <a href="#funciones" class="btn btn-secondary btn-lg">Explorar funciones</a>
+        </div>
+
+        <ul class="hero-highlights enter" style="--d: 5">
+          <li><svg class="ico ico-check"><use href="#i-check" /></svg> Sin tarjeta de crédito</li>
+          <li><svg class="ico ico-check"><use href="#i-check" /></svg> 100% en la nube (web y móvil)</li>
+          <li><svg class="ico ico-check"><use href="#i-check" /></svg> 15 días de Negocio Total al aprobar tu cuenta</li>
+        </ul>
+      </div>
+
+      <!-- Hero mockup -->
+      <div class="hero-visual enter-scale" style="--d: 3">
+        <div class="mockup-frame">
+          <div class="mockup-topbar">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="window-url">app.qadre.net</div>
+            <div class="status-live"><span class="status-indicator"></span> En línea</div>
+          </div>
+
+          <!-- Captura real de la app (tienda demo), una por tema -->
+          <img
+            class="hero-shot"
+            [src]="theme() === 'dark' ? 'img/app-inicio-dark.webp' : 'img/app-inicio-light.webp'"
+            width="1600"
+            height="919"
+            alt="Inicio de Qadre: ventas de hoy, últimos 7 días, ticket promedio, gráfica de ventas y productos más vendidos"
+            fetchpriority="high" />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Segments marquee -->
+    <div class="marquee" aria-label="Tipos de negocio que usan Qadre">
+      <div class="marquee-track">
+        @for (round of [0, 1]; track round) {
+          @for (s of segments; track s) {
+            <span class="marquee-item" [attr.aria-hidden]="round === 1 ? 'true' : null">{{ s }}</span>
+          }
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ¿PARA QUÉ SIRVE QADRE? -->
+  <section id="proposito" class="section-container">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">El propósito de Qadre</span>
+        <h2 class="section-title">¿Para qué sirve y por qué lo necesitas?</h2>
+        <p class="section-subtitle">
+          Deja atrás las libretas, las hojas de cálculo confusas y las capturas manuales de WhatsApp. Qadre unifica tu negocio en una sola herramienta accesible desde cualquier lugar.
+        </p>
+      </div>
+
+      <div class="purpose-cards-grid">
+        <div class="purpose-card glass-panel reveal" style="--i: 0">
+          <div class="icon-tile"><svg class="ico"><use href="#i-box" /></svg></div>
+          <h3>Para tiendas de productos</h3>
+          <p>
+            Vende en mostrador o a domicilio. Administra tu catálogo con fotos, controla existencias con alertas de stock bajo y comparte tu catálogo por WhatsApp.
+          </p>
+          <ul class="checklist">
+            <li><svg class="ico ico-check"><use href="#i-check" /></svg> Punto de venta ágil en computador, tablet o celular.</li>
+            <li><svg class="ico ico-check"><use href="#i-check" /></svg> Catálogo digital público para pedidos por WhatsApp.</li>
+            <li><svg class="ico ico-check"><use href="#i-check" /></svg> Apertura y cierre de caja por turnos con cuadre de efectivo.</li>
+            <li><svg class="ico ico-check"><use href="#i-check" /></svg> Control de cuentas por cobrar y clientes fiados.</li>
+          </ul>
+          <div class="purpose-badge">Modo: Tienda de productos</div>
+        </div>
+
+        <div class="purpose-card glass-panel reveal" style="--i: 1">
+          <div class="icon-tile violet"><svg class="ico"><use href="#i-scissors" /></svg></div>
+          <h3>Para negocios de servicios con citas</h3>
+          <p>
+            Ideal para barberías, salones de belleza, estéticas, spas, consultorios o talleres. Organiza tu agenda y tu personal sin cruces de horario.
+          </p>
+          <ul class="checklist">
+            <li><svg class="ico ico-check"><use href="#i-check" /></svg> Agenda del día con el estado de cada cita.</li>
+            <li><svg class="ico ico-check"><use href="#i-check" /></svg> Cada cita con su profesional, sin cruces de horario.</li>
+            <li><svg class="ico ico-check"><use href="#i-check" /></svg> Registro de asistencia (entrada y salida) en Negocio Total.</li>
+            <li><svg class="ico ico-check"><use href="#i-check" /></svg> Recordatorio de la cita al cliente por WhatsApp.</li>
+          </ul>
+          <div class="purpose-badge violet">Modo: Servicios con citas</div>
+        </div>
+      </div>
+
+      <div class="comparison-strip glass-panel reveal">
+        <div class="comparison-side old-way">
+          <span class="comp-badge bad">Antes de Qadre</span>
+          <p><svg class="ico ico-sm"><use href="#i-x" /></svg> Deudas anotadas en cuadernos que se pierden o manchan.</p>
+          <p><svg class="ico ico-sm"><use href="#i-x" /></svg> Enviar fotos de productos una por una a cada cliente.</p>
+          <p><svg class="ico ico-sm"><use href="#i-x" /></svg> No saber cuánto dinero debe haber en caja al cerrar.</p>
+        </div>
+        <div class="comparison-divider"><span>VS</span></div>
+        <div class="comparison-side new-way">
+          <span class="comp-badge good">Con Qadre</span>
+          <p><svg class="ico ico-sm"><use href="#i-check" /></svg> Cuentas por cobrar claras con comprobantes de abono instantáneos.</p>
+          <p><svg class="ico ico-sm"><use href="#i-check" /></svg> Enlace y código QR a tu catálogo donde el cliente pide solo.</p>
+          <p><svg class="ico ico-sm"><use href="#i-check" /></svg> Cierre de caja exacto, sin diferencias ni dinero perdido.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNCIONES (Bento) -->
+  <section id="funciones" class="section-container bg-surface">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Características completas</span>
+        <h2 class="section-title">Todo lo que tu negocio necesita en el día a día</h2>
+        <p class="section-subtitle">Rápido, intuitivo y sin curvas de aprendizaje frustrantes.</p>
+      </div>
+
+      <div class="bento-grid">
+        <div class="bento-card bento-lg glass-panel reveal" style="--i: 0">
+          <div class="bento-header">
+            <span class="icon-tile"><svg class="ico"><use href="#i-zap" /></svg></span>
+            <span class="bento-badge">Punto de venta ágil</span>
+          </div>
+          <h3>Punto de venta (POS) y control de caja</h3>
+          <p>
+            Registra ventas en segundos desde computador, tablet o celular. Cobra en efectivo, tarjeta, transferencia o a crédito, y abre y cierra tu caja por turnos con cuadre de efectivo.
+          </p>
+          <div class="feature-tags">
+            <span class="tag">Impresora térmica Bluetooth (Android)</span>
+            <span class="tag">Ticket en imagen y PDF</span>
+            <span class="tag">Caja por turnos</span>
+          </div>
+        </div>
+
+        <div class="bento-card glass-panel reveal" style="--i: 1">
+          <div class="bento-header">
+            <span class="icon-tile cyan"><svg class="ico"><use href="#i-chart" /></svg></span>
+            <span class="bento-badge">Stock en vivo</span>
+          </div>
+          <h3>Inventario inteligente</h3>
+          <p>Monitorea stock, costo de compra y margen de ganancia. Recibe avisos cuando un producto esté por agotarse.</p>
+          <div class="feature-tags">
+            <span class="tag">Alertas de stock bajo</span>
+            <span class="tag">Categorías ilimitadas</span>
+          </div>
+        </div>
+
+        <div class="bento-card glass-panel reveal" style="--i: 0">
+          <div class="bento-header">
+            <span class="icon-tile amber"><svg class="ico"><use href="#i-wallet" /></svg></span>
+            <span class="bento-badge">Cuentas claras</span>
+          </div>
+          <h3>Fiados y comprobantes de abono</h3>
+          <p>Registra clientes con crédito. Cada abono genera una imagen del comprobante con el saldo restante, lista para WhatsApp.</p>
+          <div class="feature-tags">
+            <span class="tag">Comprobante de abono</span>
+            <span class="tag">Recordatorios WhatsApp</span>
+          </div>
+        </div>
+
+        <div class="bento-card glass-panel reveal" style="--i: 1">
+          <div class="bento-header">
+            <span class="icon-tile"><svg class="ico"><use href="#i-phone" /></svg></span>
+            <span class="bento-badge">Tienda online</span>
+          </div>
+          <h3>Catálogo digital web y QR</h3>
+          <p>
+            Tu vitrina virtual (ej. <code>app.qadre.net/c/tu-tienda</code>). Tus clientes navegan y envían el carrito directo a tu WhatsApp.
+          </p>
+          <div class="feature-tags">
+            <span class="tag">Código QR imprimible</span>
+            <span class="tag">Pedidos listos por chat</span>
+          </div>
+        </div>
+
+        <div class="bento-card glass-panel reveal" style="--i: 2">
+          <div class="bento-header">
+            <span class="icon-tile violet"><svg class="ico"><use href="#i-image" /></svg></span>
+            <span class="bento-badge">Vende más</span>
+          </div>
+          <h3>Estudio de marketing y pósters</h3>
+          <p>Crea pósters para tus estados de WhatsApp e Instagram en un clic con las fotos y precios de tus productos.</p>
+          <div class="feature-tags">
+            <span class="tag">Generador de pósters</span>
+            <span class="tag">Formato historias 9:16</span>
+          </div>
+        </div>
+
+        <div class="bento-card bento-lg glass-panel reveal" style="--i: 1">
+          <div class="bento-header">
+            <span class="icon-tile cyan"><svg class="ico"><use href="#i-calendar" /></svg></span>
+            <span class="bento-badge">Servicios y equipo</span>
+          </div>
+          <h3>Agenda de citas y control de asistencia</h3>
+          <p>
+            Coordina las reservas por fecha, hora y especialista. En Negocio Total, registra entradas y salidas de tus colaboradores y calcula horas con recargos.
+          </p>
+          <div class="feature-tags">
+            <span class="tag">Calendario de citas</span>
+            <span class="tag">Check-in de colaboradores</span>
+            <span class="tag">Novedades y permisos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUESTA EN MARCHA -->
+  <section id="tiempos" class="section-container">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Sin complicaciones técnicas</span>
+        <h2 class="section-title">Empieza a vender en pocos pasos</h2>
+        <p class="section-subtitle">Sin técnicos ni instalaciones. Te registras, aprobamos tu tienda y empiezas.</p>
+      </div>
+
+      <div class="timeline-grid reveal">
+        <div class="timeline-line" aria-hidden="true"></div>
+        <div class="step-card glass-panel" style="--i: 0">
+          <div class="step-number">1</div>
+          <div class="step-time">Paso 1</div>
+          <h4>Crea tu cuenta gratis</h4>
+          <p>Ingresa tus datos y el nombre de tu negocio. Revisamos tu registro y activamos tus 15 días de prueba.</p>
+        </div>
+        <div class="step-card glass-panel" style="--i: 1">
+          <div class="step-number">2</div>
+          <div class="step-time">Paso 2</div>
+          <h4>Configura tus productos</h4>
+          <p>Agrega tus productos o servicios con foto, precio y stock.</p>
+        </div>
+        <div class="step-card glass-panel" style="--i: 2">
+          <div class="step-number">3</div>
+          <div class="step-time">Paso 3</div>
+          <h4>Personaliza tu marca</h4>
+          <p>Sube tu logo, define tus medios de pago (Nequi, Bancolombia, QR) y activa tu catálogo.</p>
+        </div>
+        <div class="step-card glass-panel active-step" style="--i: 3">
+          <div class="step-number">4</div>
+          <div class="step-time">Paso 4</div>
+          <h4>¡Listo para vender!</h4>
+          <p>Abre tu caja, atiende en mostrador o comparte tu enlace por WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMOCIÓN -->
+  <section id="promociones" class="section-container bg-surface">
+    <div class="container">
+      <div class="promo-banner reveal">
+        <div class="badge-pill gold">
+          <svg class="ico ico-sm"><use href="#i-gift" /></svg>
+          <span>Promoción especial de lanzamiento</span>
+        </div>
+        <h2 class="promo-title">Comienza con 15 días gratis de Negocio Total, sin compromiso</h2>
+        <p class="promo-desc">
+          Prueba todo cuando aprobamos tu cuenta: fiados con comprobantes de abono, prefacturas, control de asistencia, usuarios ilimitados y 100 pósters. Al terminar sigues gratis en Emprendedor.
+        </p>
+        <div class="promo-perks">
+          <div class="perk-item">
+            <span class="icon-tile"><svg class="ico"><use href="#i-card" /></svg></span>
+            <span><strong>0 pesos hoy.</strong> No ingresas tarjeta bancaria.</span>
+          </div>
+          <div class="perk-item">
+            <span class="icon-tile cyan"><svg class="ico"><use href="#i-rocket" /></svg></span>
+            <span><strong>Acceso total.</strong> Todas las funciones desbloqueadas.</span>
+          </div>
+          <div class="perk-item">
+            <span class="icon-tile amber"><svg class="ico"><use href="#i-percent" /></svg></span>
+            <span><strong>20% OFF extra.</strong> Si eliges pago anual.</span>
+          </div>
+        </div>
+        <a href="https://app.qadre.net/#/register" target="_blank" rel="noopener" class="btn btn-primary btn-lg shine">
+          Reclamar mis 15 días gratis
+          <svg class="ico"><use href="#i-arrow" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANES -->
+  <section id="planes" class="section-container">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Tarifas transparentes</span>
+        <h2 class="section-title">Planes para cada etapa de tu negocio</h2>
+        <p class="section-subtitle">Elige el plan que mejor se adapte a ti. Sin permanencia: cambias de plan o dejas de pagar cuando quieras.</p>
+
+        <div class="billing-toggle" role="group" aria-label="Ciclo de facturación" [class.annual]="billingCycle() === 'annual'">
+          <span class="billing-thumb" aria-hidden="true"></span>
+          <button type="button" class="billing-btn" [class.active]="billingCycle() === 'monthly'" [attr.aria-pressed]="billingCycle() === 'monthly'" (click)="toggleBilling('monthly')">
+            Mensual
+          </button>
+          <button type="button" class="billing-btn" [class.active]="billingCycle() === 'annual'" [attr.aria-pressed]="billingCycle() === 'annual'" (click)="toggleBilling('annual')">
+            Anual <span class="discount-pill">-20%</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        @for (plan of plans; track plan.id; let i = $index) {
+          <div class="pricing-card glass-panel reveal" [class.featured-card]="plan.recommended" [style.--i]="i">
+            @if (plan.badge) {
+              <div class="pricing-badge">{{ plan.badge }}</div>
+            }
+            <h3 class="plan-name">{{ plan.name }}</h3>
+            <p class="plan-desc">{{ plan.desc }}</p>
+
+            <div class="plan-price-wrap">
+              @if (plan.priceMonthly === 0) {
+                <span class="price-number">Gratis</span>
+                <span class="price-period">para siempre</span>
+              } @else {
+                <span class="currency-symbol">$</span>
+                <!-- single-item loop re-creates the node on cycle change so the CSS animation replays -->
+                @for (c of [billingCycle()]; track c) {
+                  <span class="price-number">{{ formatMoney(getPrice(plan)) }}</span>
+                }
+                <span class="price-period">COP / mes</span>
+              }
+            </div>
+            <div class="annual-note" [class.visible]="billingCycle() === 'annual' && plan.priceMonthly > 0">
+              Facturado anualmente: ahorras {{ formatMoney((plan.priceMonthly - getPrice(plan)) * 12) }} al año
+            </div>
+
+            <div class="plan-divider"></div>
+
+            <ul class="checklist plan-features">
+              @for (feat of plan.features; track feat) {
+                <li><svg class="ico ico-check"><use href="#i-check" /></svg> {{ feat }}</li>
+              }
+              @for (ex of plan.excluded ?? []; track ex) {
+                <li class="excluded"><svg class="ico ico-x"><use href="#i-x" /></svg> {{ ex }}</li>
+              }
+            </ul>
+
+            <a href="https://app.qadre.net/#/register" target="_blank" rel="noopener" class="btn w-full" [ngClass]="plan.ctaClass">
+              {{ plan.cta }}
+            </a>
+          </div>
+        }
+      </div>
+
+      <!-- Plan comparison: what each plan can and cannot do -->
+      <div class="compare reveal">
+        <div class="compare-head">
+          <h3>Compara qué puedes hacer con cada plan</h3>
+          <p>Lo que incluye y lo que no incluye cada plan, sin letra pequeña.</p>
+        </div>
+
+        <div class="compare-card glass-panel">
+          <table class="compare-table">
+            <caption class="sr-only">Comparación de funciones por plan</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="feat-col">Función</th>
+                @for (plan of plans; track plan.id) {
+                  <th scope="col" [class.hl]="plan.recommended">
+                    <span class="th-name">{{ plan.name }}</span>
+                    <span class="th-price">{{ plan.priceMonthly === 0 ? 'Gratis' : '$ ' + formatMoney(getPrice(plan)) }}</span>
+                  </th>
+                }
+              </tr>
+            </thead>
+            @for (group of compareGroups; track group.title) {
+              <tbody>
+                <tr class="group-row">
+                  <th scope="rowgroup" [attr.colspan]="plans.length + 1">{{ group.title }}</th>
+                </tr>
+                @for (row of group.rows; track row.label) {
+                  <tr>
+                    <th scope="row" class="feat-col">{{ row.label }}</th>
+                    @for (v of row.values; track $index) {
+                      <td [class.hl]="plans[$index].recommended">
+                        @if (isBool(v)) {
+                          @if (v) {
+                            <span class="yes" title="Incluido"><svg class="ico ico-sm"><use href="#i-check" /></svg><span class="sr-only">Incluido</span></span>
+                          } @else {
+                            <span class="no" title="No incluido"><svg class="ico ico-sm"><use href="#i-x" /></svg><span class="sr-only">No incluido</span></span>
+                          }
+                        } @else {
+                          <span class="val">{{ v }}</span>
+                        }
+                      </td>
+                    }
+                  </tr>
+                }
+              </tbody>
+            }
+          </table>
+        </div>
+
+        <p class="compare-note">
+          Al aprobar tu cuenta tienes 15 días gratis de Negocio Total. Después sigues en Emprendedor sin perder datos o eliges un plan pago.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section-container bg-surface">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Resolvemos tus dudas</span>
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <p class="section-subtitle">Todo lo que necesitas saber antes de empezar con Qadre.</p>
+      </div>
+
+      <div class="faq-list">
+        @for (faq of faqs; track faq.id; let i = $index) {
+          <div class="faq-item glass-panel reveal" [class.open]="activeFaq() === faq.id" [style.--i]="i">
+            <button class="faq-question" (click)="toggleFaq(faq.id)" type="button" [attr.aria-expanded]="activeFaq() === faq.id">
+              <span>{{ faq.question }}</span>
+              <span class="faq-icon"><svg class="ico"><use href="#i-plus" /></svg></span>
+            </button>
+            <div class="faq-answer">
+              <div><p>{{ faq.answer }}</p></div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section-container">
+    <div class="container">
+      <div class="contact-grid glass-panel reveal">
+        <div class="contact-info">
+          <span class="section-tag">Estamos para ayudarte</span>
+          <h2 class="contact-title">¿Tienes preguntas o quieres una demostración?</h2>
+          <p class="contact-desc">
+            Habla directamente con nuestro equipo. Te guiamos paso a paso para dejar tu negocio 100% configurado.
+          </p>
+
+          <div class="contact-items">
+            <a class="info-row" href="https://wa.me/573126430636" target="_blank" rel="noopener">
+              <span class="icon-tile"><svg class="ico"><use href="#i-chat" /></svg></span>
+              <div><strong>WhatsApp asesoría</strong><p>+57 (312) 643-0636</p></div>
+            </a>
+            <a class="info-row" href="mailto:soporte&#64;qadre.net">
+              <span class="icon-tile cyan"><svg class="ico"><use href="#i-mail" /></svg></span>
+              <div><strong>Correo electrónico</strong><p>soporte&#64;qadre.net</p></div>
+            </a>
+            <a class="info-row" href="https://app.qadre.net" target="_blank" rel="noopener">
+              <span class="icon-tile violet"><svg class="ico"><use href="#i-globe" /></svg></span>
+              <div><strong>Plataforma web</strong><p>app.qadre.net</p></div>
+            </a>
+          </div>
+
+          <a
+            href="https://wa.me/573126430636?text=Hola%20equipo%20Qadre,%20quiero%20solicitar%20una%20demostraci%C3%B3n"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-whatsapp">
+            <svg class="ico"><use href="#i-chat" /></svg>
+            Chatear con un asesor
+          </a>
+        </div>
+
+        <div class="contact-form-card">
+          <h3>Solicitar información o demo</h3>
+          <p class="form-sub">Déjanos tus datos y te escribimos lo antes posible.</p>
+
+          <form (ngSubmit)="sendContact()" class="contact-form">
+            <div class="form-group">
+              <label for="name">Tu nombre *</label>
+              <input type="text" id="name" name="name" [(ngModel)]="contactData.name" placeholder="Ej. Carlos Miranda" required />
+            </div>
+            <div class="form-group">
+              <label for="business">Nombre de tu negocio</label>
+              <input type="text" id="business" name="business" [(ngModel)]="contactData.business" placeholder="Ej. The Nexus Store" />
+            </div>
+            <div class="form-group">
+              <label for="type">Tipo de negocio</label>
+              <select id="type" name="type" [(ngModel)]="contactData.type">
+                <option value="productos">Tienda de productos (POS, inventario, catálogo)</option>
+                <option value="servicios">Servicios con citas (barbería, estética, consultorio)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="phone">Número de WhatsApp *</label>
+              <input type="tel" id="phone" name="phone" [(ngModel)]="contactData.phone" placeholder="Ej. 312 643 0636" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" [(ngModel)]="contactData.email" placeholder="Ej. carlos@minegocio.com" />
+            </div>
+            <!-- campo trampa: los bots lo llenan, las personas no lo ven -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="website">Sitio web</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" [(ngModel)]="contactData.website" />
+            </div>
+            <div class="form-group">
+              <label for="message">¿Qué te gustaría mejorar en tu negocio?</label>
+              <textarea id="message" name="message" rows="3" [(ngModel)]="contactData.message" placeholder="Ej. Quiero controlar mis fiados y tener un catálogo web..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-full" [disabled]="contactStatus() === 'sending'">
+              {{ contactStatus() === 'sending' ? 'Enviando…' : 'Enviar solicitud' }}
+              <svg class="ico"><use href="#i-arrow" /></svg>
+            </button>
+            @if (contactStatus() === 'sent') {
+              <p class="form-ok" role="status"><svg class="ico ico-sm"><use href="#i-check" /></svg> Recibimos tu solicitud. Te contactaremos pronto.</p>
+            } @else if (contactStatus() === 'error') {
+              <p class="form-error" role="alert">{{ contactError() }}</p>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="footer-brand">
+      <div class="brand-logo">
+        <img class="brand-icon on-dark" src="brand/icon-dark.png" alt="" width="40" height="40" />
+        <img class="brand-icon on-light" src="brand/icon-light.png" alt="" width="40" height="40" />
+        <img class="brand-wordmark on-dark" src="brand/wordmark-dark.png" alt="Qadre, tu negocio al día" width="300" height="121" />
+        <img class="brand-wordmark on-light" src="brand/wordmark-light.png" alt="Qadre, tu negocio al día" width="300" height="121" />
+      </div>
+      <p class="footer-text">
+        La plataforma en la nube para puntos de venta, inventario, cuentas por cobrar y catálogos interactivos. Hecha para hacer crecer tu negocio.
+      </p>
+    </div>
+
+    <div class="footer-links-grid">
+      <div class="footer-col">
+        <h5>Plataforma</h5>
+        <a href="https://app.qadre.net" target="_blank" rel="noopener">Ingresar a la app</a>
+        <a href="https://app.qadre.net/#/register" target="_blank" rel="noopener">Crear cuenta gratis</a>
+        <a href="#funciones">Funcionalidades</a>
+        <a href="#planes">Planes y precios</a>
+      </div>
+      <div class="footer-col">
+        <h5>Soluciones</h5>
+        <a href="#proposito">Tiendas de productos</a>
+        <a href="#proposito">Servicios con citas</a>
+        <a href="#funciones">Catálogo digital WhatsApp</a>
+        <a href="#promociones">Promociones</a>
+      </div>
+      <div class="footer-col">
+        <h5>Soporte</h5>
+        <a href="#contacto">Contacto WhatsApp</a>
+        <a href="mailto:soporte&#64;qadre.net">soporte&#64;qadre.net</a>
+        <a href="#faq">Preguntas frecuentes</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container bottom-wrap">
+      <span>© {{ year }} QADRE. Todos los derechos reservados.</span>
+      <a class="credit" href="#" aria-label="Diseñado por The Nexus Dev">
+        <span>Diseñado por</span>
+        <img class="on-dark" src="brand/nexus-dark.png" alt="The Nexus Dev" width="480" height="236" />
+        <img class="on-light" src="brand/nexus-light.png" alt="The Nexus Dev" width="480" height="237" />
+      </a>
+    </div>
+  </div>
+</footer>
