@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 // API de Qadre: en local apunta al servidor de desarrollo
-const API_URL = ['localhost', '127.0.0.1'].includes(globalThis.location?.hostname ?? '')
+export const POS_APK_URL = (globalThis as any).QADRE_POS_APK_URL ?? 'https://media.qadre.net/apps/qadre-pos-1.apk';
+
+export const API_URL = ['localhost', '127.0.0.1'].includes(globalThis.location?.hostname ?? '')
   ? 'http://localhost:3000/api/v1'
   : 'https://api.qadre.net/api/v1';
 

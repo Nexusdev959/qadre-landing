@@ -96,6 +96,7 @@
         <svg class="ico ico-sun"><use href="#i-sun" /></svg>
         <svg class="ico ico-moon"><use href="#i-moon" /></svg>
       </button>
+      <a href="/tienda" class="btn btn-ghost hide-sm">Apps</a>
       <a href="https://app.qadre.net" target="_blank" rel="noopener" class="btn btn-ghost hide-sm">Iniciar sesión</a>
       <a href="https://app.qadre.net/#/register" target="_blank" rel="noopener" class="btn btn-primary hide-sm">
         <span>Probar gratis</span>
@@ -126,6 +127,7 @@
             <a [href]="'#' + item.id" [style.--i]="i" (click)="closeMobileMenu()">{{ item.label }}</a>
           }
         }
+        <a href="/tienda" (click)="closeMobileMenu()">Tienda de apps</a>
         <div class="mobile-cta-group">
           <a href="https://app.qadre.net" target="_blank" rel="noopener" class="btn btn-secondary w-full">Iniciar sesión</a>
           <a href="https://app.qadre.net/#/register" target="_blank" rel="noopener" class="btn btn-primary w-full">Empezar 15 días gratis</a>
@@ -755,6 +757,7 @@
         <a href="https://app.qadre.net/#/register" target="_blank" rel="noopener">Crear cuenta gratis</a>
         <a href="#funciones">Funcionalidades</a>
         <a href="#planes">Planes y precios</a>
+        <a href="/tienda">Tienda de apps (Qadre POS)</a>
       </div>
       <div class="footer-col">
         <h5>Soluciones</h5>

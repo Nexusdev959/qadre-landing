@@ -1,5 +1,8 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { App } from './app/app';
+import { Store } from './app/store';
 
-bootstrapApplication(App, appConfig).catch((err) => console.error(err));
+// La tienda de apps vive en /tienda como página aparte; el resto es la landing
+const root = location.pathname.startsWith('/tienda') ? Store : App;
+bootstrapApplication(root, appConfig).catch((err) => console.error(err));

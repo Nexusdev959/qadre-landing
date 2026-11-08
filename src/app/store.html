@@ -1,0 +1,177 @@
+<svg class="sprite" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M16 15h2"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></symbol>
+  </defs>
+</svg>
+
+<div class="bg-fx" aria-hidden="true">
+  <div class="bg-grid"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+</div>
+
+<header class="navbar scrolled">
+  <div class="nav-container">
+    <a href="/" class="brand-logo" aria-label="Qadre, volver al inicio">
+      <img class="brand-icon on-dark" src="brand/icon-dark.png" alt="" width="40" height="40" />
+      <img class="brand-icon on-light" src="brand/icon-light.png" alt="" width="40" height="40" />
+      <img class="brand-wordmark on-dark" src="brand/wordmark-dark.png" alt="Qadre" width="300" height="121" />
+      <img class="brand-wordmark on-light" src="brand/wordmark-light.png" alt="Qadre" width="300" height="121" />
+    </a>
+    <span class="store-chip">Apps</span>
+
+    <label class="store-search hide-sm">
+      <svg class="ico"><use href="#i-search" /></svg>
+      <input type="search" placeholder="Buscar apps" [value]="query()" (input)="query.set($any($event.target).value)" aria-label="Buscar apps" />
+    </label>
+
+    <div class="nav-actions">
+      <button
+        type="button"
+        class="theme-toggle"
+        (click)="toggleTheme()"
+        [attr.aria-label]="theme() === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'">
+        <svg class="ico ico-sun"><use href="#i-sun" /></svg>
+        <svg class="ico ico-moon"><use href="#i-moon" /></svg>
+      </button>
+      <a href="/" class="btn btn-ghost hide-sm">
+        <svg class="ico"><use href="#i-back" /></svg>
+        <span>Volver a Qadre</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="store-main">
+  <!-- Portada -->
+  <section class="container store-hero">
+    <span class="section-tag">Tienda Qadre</span>
+    <h1 class="store-title">Apps para llevar tu negocio <span class="gradient-text">a cualquier dispositivo.</span></h1>
+    <p class="section-subtitle">Descarga las aplicaciones oficiales de Qadre. Todas usan tu misma cuenta, catálogo e inventario.</p>
+
+    <label class="store-search store-search-sm">
+      <svg class="ico"><use href="#i-search" /></svg>
+      <input type="search" placeholder="Buscar apps" [value]="query()" (input)="query.set($any($event.target).value)" aria-label="Buscar apps" />
+    </label>
+
+    <div class="store-chips" role="tablist" aria-label="Categorías">
+      @for (c of categories(); track c) {
+        <button type="button" role="tab" class="chip" [class.active]="category() === c" [attr.aria-selected]="category() === c" (click)="category.set(c)">{{ c }}</button>
+      }
+    </div>
+  </section>
+
+  <!-- Catálogo -->
+  <section class="container">
+    <h2 class="store-h2">Destacadas</h2>
+    <div class="app-grid">
+      @for (app of filtered(); track app.id) {
+        <button type="button" class="app-tile glass-panel" [class.active]="selected().id === app.id" (click)="select(app)">
+          <img class="app-icon" [src]="app.icon" alt="" width="72" height="72" />
+          <span class="app-tile-body">
+            <strong>{{ app.name }}</strong>
+            <span>{{ app.tagline }}</span>
+            <small>{{ app.category }} · {{ app.downloadUrl ? 'Gratis' : 'Próximamente' }}</small>
+          </span>
+        </button>
+      } @empty {
+        <p class="text-muted">No encontramos apps con “{{ query() }}”.</p>
+      }
+      <div class="app-tile app-tile-soon" aria-hidden="true">
+        <span class="app-icon app-icon-soon"><svg class="ico"><use href="#i-plus" /></svg></span>
+        <span class="app-tile-body">
+          <strong>Más apps en camino</strong>
+          <span>Nuevos servicios de Qadre llegarán aquí.</span>
+          <small>Próximamente</small>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ficha de la app -->
+  @if (selected(); as app) {
+    <section id="detalle" class="container app-detail">
+      <div class="detail-head glass-panel">
+        <img class="app-icon app-icon-lg" [src]="app.icon" alt="" width="112" height="112" />
+        <div class="detail-info">
+          <h2>{{ app.name }}</h2>
+          <a class="dev" href="/">Qadre</a>
+          <p class="text-muted">{{ app.tagline }}</p>
+
+          <dl class="stats">
+            <div><dt>Gratis</dt><dd>Precio</dd></div>
+            <div><dt>{{ app.version ?? '—' }}</dt><dd>Versión</dd></div>
+            <div><dt>Android</dt><dd>{{ app.requirements }}</dd></div>
+            <div><dt><svg class="ico ico-sm"><use href="#i-shield" /></svg></dt><dd>App oficial</dd></div>
+          </dl>
+
+          @if (app.downloadUrl) {
+            <a class="btn btn-primary btn-lg shine install-btn" [href]="app.downloadUrl" download>
+              <svg class="ico"><use href="#i-download" /></svg>
+              <span>Instalar</span>
+            </a>
+          } @else {
+            <button type="button" class="btn btn-secondary btn-lg install-btn" disabled>Próximamente</button>
+          }
+        </div>
+      </div>
+
+      @if (app.screenshots.length) {
+        <div class="shots" aria-label="Capturas de pantalla">
+          @for (s of app.screenshots; track s) {
+            <img [src]="s" alt="Captura de {{ app.name }}" loading="lazy" />
+          }
+        </div>
+      }
+
+      <div class="detail-grid">
+        <article class="glass-panel detail-card">
+          <h3>Acerca de esta app</h3>
+          @for (p of app.about; track $index) {
+            <p>{{ p }}</p>
+          }
+          <div class="highlights">
+            @for (h of app.highlights; track h.title) {
+              <div class="highlight">
+                <span class="icon-tile"><svg class="ico"><use [attr.href]="'#' + h.icon" /></svg></span>
+                <div>
+                  <strong>{{ h.title }}</strong>
+                  <span>{{ h.text }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </article>
+
+        <aside class="glass-panel detail-card">
+          <h3>Cómo instalar</h3>
+          <ol class="steps">
+            <li><strong>Descarga el APK</strong><span>Toca <em>Instalar</em> desde tu dispositivo Android.</span></li>
+            <li><strong>Permite la fuente</strong><span>Si el navegador lo pide, activa <em>“Permitir desde esta fuente”</em>.</span></li>
+            <li><strong>Play Protect</strong><span>Si aparece una alerta, pulsa <em>“Más detalles”</em> y luego <em>“Instalar de todas formas”</em>.</span></li>
+            <li><strong>Inicia sesión</strong><span>Entra con tu cuenta de Qadre y empieza a vender.</span></li>
+          </ol>
+        </aside>
+      </div>
+    </section>
+  }
+</main>
+
+<footer class="store-footer">
+  <div class="container">
+    <span>© {{ year }} QADRE. Todos los derechos reservados.</span>
+    <a href="/">qadre.net</a>
+  </div>
+</footer>
